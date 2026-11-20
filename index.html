@@ -147,7 +147,7 @@ function unlock(){A.classList.add("on");N.classList.add("on");A.scrollIntoView()
   .then(j=>views.textContent=j.count).catch(()=>views.textContent="enable “Allow adding visitor counts” in GoatCounter settings");}
 document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="a")unlock()});
 if(location.hash==="#viewerstat")unlock();
-let c=0;document.getElementById("copy").onclick=()=>{if(++c>=5)unlock()};
+let c=0;document.getElementById("copy").onclick=()=>{if(++c>=15)unlock()};
 </script>
 </body>
 </html>
