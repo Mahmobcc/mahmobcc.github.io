@@ -15,7 +15,7 @@ body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.65 Georgia,"Times
 a{color:var(--ac)}h1,h2,h3,nav,.sans{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 nav{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--bd);z-index:5;display:flex;gap:18px;padding:14px 5%;overflow-x:auto;white-space:nowrap;font-size:14px}
 nav a{text-decoration:none;color:var(--mut)}nav a:hover{color:var(--ac)}
-#navAdmin{display:none}#navAdmin.on{display:inline}
+#navStat{display:none}#navStat.on{display:inline}
 main{max-width:880px;margin:auto;padding:0 5% 60px}
 header{padding:60px 0 30px}h1{font-size:2.3rem;margin:0 0 6px}
 .tag{color:var(--ac);font-size:1.1rem;margin:0 0 16px}
@@ -29,8 +29,8 @@ ul{padding-left:20px}li{margin-bottom:8px}
 .pub{font-size:.95rem}.pub b{color:var(--tx)}.pub i{color:var(--mut)}
 .btn{display:inline-block;background:var(--ac);color:var(--bg);padding:8px 16px;border-radius:8px;text-decoration:none;font:600 14px system-ui;margin:0 8px 8px 0;border:0;cursor:pointer}
 .btn.o{background:none;color:var(--ac);border:1px solid var(--ac)}
-#admin{display:none;background:var(--card);border:1px dashed var(--ac);border-radius:10px;padding:20px;margin:28px 0}
-#admin.on{display:block}
+#stat{display:none;background:var(--card);border:1px dashed var(--ac);border-radius:10px;padding:20px;margin:28px 0}
+#stat.on{display:block}
 footer{text-align:center;color:var(--mut);font:13px system-ui;padding:20px}
 </style>
 </head>
@@ -38,7 +38,7 @@ footer{text-align:center;color:var(--mut);font:13px system-ui;padding:20px}
 <nav>
 <a href="#about">About</a><a href="#research">Research</a><a href="#pubs">Publications</a><a href="#projects">Projects</a>
 <a href="#edu">Education</a><a href="#exp">Experience</a><a href="#awards">Awards</a><a href="#service">Service</a><a href="#contact">Contact</a>
-<a href="#admin" id="navAdmin">Visitors</a>
+<a href="#stat" id="navStat">Visitors</a>
 </nav>
 <main>
 <header id="about">
@@ -118,7 +118,7 @@ footer{text-align:center;color:var(--mut);font:13px system-ui;padding:20px}
 <p class="m" style="color:var(--mut)">Kaliakair, Gazipur, Dhaka, Bangladesh</p>
 </section>
 
-<div id="admin">
+<div id="stat">
 <h2>Visitor analytics (private)</h2>
 <p>Total page views: <b id="views">loading…</b></p>
 <p>Visitor locations (country, city), browsers and referrers are in your GoatCounter dashboard. It requires your login, so nobody else can see it.</p>
@@ -134,15 +134,15 @@ pl.innerHTML=P.map((p,i)=>`<li${i>=SH?' class="more" hidden':''}><b>${p[1]}.</b>
 const tg=document.getElementById("tg");tg.textContent="Show all "+P.length+" publications";
 tg.onclick=()=>{const h=pl.querySelector(".more").hidden;pl.querySelectorAll(".more").forEach(e=>e.hidden=!h);tg.textContent=h?"Show fewer":"Show all "+P.length+" publications"};
 
-// Hidden admin: Ctrl+Shift+A, URL #admin, or click the footer text 5 times
-const A=document.getElementById("admin"),N=document.getElementById("navAdmin");
+// Hidden stat: Ctrl+Shift+A, URL #stat, or click the footer text 5 times
+const A=document.getElementById("stat"),N=document.getElementById("navStat");
 function unlock(){A.classList.add("on");N.classList.add("on");A.scrollIntoView();
  const d=document.getElementById("dash").href.replace(/\/$/,"");
  fetch(d+"/counter/"+encodeURIComponent(location.pathname)+".json").then(r=>r.json())
   .then(j=>views.textContent=j.count).catch(()=>views.textContent="enable “Allow adding visitor counts” in GoatCounter settings");}
 document.addEventListener("keydown",e=>{if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==="a")unlock()});
-if(location.hash==="#admin")unlock();
-let c=0;document.getElementById("copy").onclick=()=>{if(++c>=5)unlock()};
+if(location.hash==="#stat")unlock();
+let c=0;document.getElementById("copy").onclick=()=>{if(++c>=15)unlock()};
 </script>
 </body>
 </html>
